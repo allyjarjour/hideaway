@@ -1,6 +1,60 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
+@import 'variables';
 
-body {
-  background-color: $primary-background;
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+.sign-in-page {
+  height: 100vh;
+  width: 100%;
+  .background-img {
+    min-height: 100%;
+    min-width: 1000px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  .sign-in-section {
+    z-index: 10;
+    padding-top: 20px;
+    position: absolute;
+    background: rgba($pink, 0.6);
+    text-align: center;
+    margin: 5% 10%;
+    width: 80%;
+    height: 75%;
+  }
+}
+
+h1 {
+  font-family: 'Staatliches', cursive;
+  font-size: 50px;
+  text-transform: uppercase;
+}
+
+h2,
+p {
+  font-family: 'Raleway', sans-serif;
+}
+
+.hide {
+  display: none;
+}
+
+// .nav {
+//   font-family: 'Staatliches', cursive;
+//   position: fixed
+//   width: 100%;
+//   height: 10vh;
+//   background-color: $pink;
+  // z-index: 10;
+  // h1 {
+  //   color: $teal;
+  // }
+// }
