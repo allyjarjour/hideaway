@@ -7,14 +7,18 @@
   <body>
     <main>
       <nav>
-        <h1>Hideaway</h1>
+        <h1 class="header">Hideaway</h1>
       </nav>
       <section class="sign-in-page">
         <section class="sign-in-section">
-          <h1>Hideaway</h1>
-          <!-- <h2>Welcome</h2> -->
-          <p>sign in below</p>
-          <form></form>
+          <h1 class="header">Hideaway</h1>
+          <form class="sign-in-form">
+            <label for="username"><p>Username</p></label>
+            <input class="username-input" type="text" name="username"></input>
+            <label for="password"><p>Password</p></label>
+            <input type="text" name="password"></input>
+            <button id="sign-in-btn">Submit</button>
+          </form>
         </section>
         <img class="background-img" src="../images/cactus.jpg" alt="Cactus in Oaxaca">
       </section>

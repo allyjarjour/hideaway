@@ -8,6 +8,23 @@
   padding: 0;
 }
 
+.header {
+  font-family: 'Staatliches', cursive;
+  font-size: 50px;
+  text-transform: uppercase;
+  color: $sage;
+}
+
+nav {
+  font-family: 'Staatliches', cursive;
+  width: 100%;
+  height: 10vh;
+  background-color: $pink;
+  h1 {
+    margin-left: 10px;
+  }
+}
+
 .sign-in-page {
   height: 100vh;
   width: 100%;
@@ -24,37 +41,45 @@
     z-index: 10;
     padding-top: 20px;
     position: absolute;
-    background: rgba($pink, 0.6);
+    // background: rgba($pink, 0.6);
     text-align: center;
     margin: 5% 10%;
     width: 80%;
     height: 75%;
   }
-}
-
-h1 {
-  font-family: 'Staatliches', cursive;
-  font-size: 50px;
-  text-transform: uppercase;
+  h1 {
+    margin-top: 20px;
+  }
 }
 
 h2,
-p {
+p,
+button {
   font-family: 'Raleway', sans-serif;
+  color: $teal;
 }
 
 .hide {
   display: none;
 }
 
-// .nav {
-//   font-family: 'Staatliches', cursive;
-//   position: fixed
-//   width: 100%;
-//   height: 10vh;
-//   background-color: $pink;
-  // z-index: 10;
-  // h1 {
-  //   color: $teal;
-  // }
-// }
+.sign-in-form {
+  background: rgba($pink, 0.9);
+  width: 40%;
+  margin: 5% auto;
+  padding: 30px 0px 30px 0px;
+  p {
+    margin: 10px 0px;
+  }
+  input {
+    height: 25px;
+    border: none;
+  }
+  button {
+  padding: 5px 10px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  background-color: $grey;
+  }
+}
