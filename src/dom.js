@@ -1,10 +1,11 @@
 import './css/base.scss';
+// import './index.js';
 import $ from "jquery"
 
 const dom = {
 
-  load(data) {
-    loadWelcomePage();
+  load(allData) {
+    this.loadWelcomePage();
   },
 
   loadWelcomePage() {
@@ -15,10 +16,28 @@ const dom = {
     $('.client-bookings').addClass('hide')
   },
 
-  loadManagerHome(data) {
+  loadManagerHome(allData) {
+    $('.sign-in-page').addClass('hide')
     $('nav').removeClass('hide')
     $('.manager-home').removeClass('hide')
-    console.log(data.userData);
+    allData.bookingManager.findTodaysOpenRooms();
+    this.showStats(allData);
+  },
+
+  showStats(allData) {
+    $('#open-beds').text(`${allData.bookingManager.findTodaysOpenRooms().length}`);
+    // console.log(allData.bookingManager.findTodaysOpenRooms(allData.todayDate).length);
+  },
+
+  showOpenRooms(todaysOpenRooms) {
+    // add to dom
+    console.log('kitties');
+  },
+
+  loadClientHome() {
+    $('.sign-in-page').addClass('hide')
+    $('nav').removeClass('hide')
+    $('.client-home').removeClass('hide')
   }
 
 }

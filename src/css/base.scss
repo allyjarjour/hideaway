@@ -41,7 +41,6 @@ nav {
     z-index: 10;
     padding-top: 20px;
     position: absolute;
-    // background: rgba($pink, 0.6);
     text-align: center;
     margin: 5% 10%;
     width: 80%;
@@ -54,7 +53,8 @@ nav {
 
 h2,
 p,
-button {
+button,
+h3 {
   font-family: 'Raleway', sans-serif;
   color: $teal;
 }
@@ -68,6 +68,7 @@ button {
   width: 40%;
   margin: 5% auto;
   padding: 30px 0px 30px 0px;
+  border-radius: 5px;
   p {
     margin: 10px 0px;
   }
@@ -81,5 +82,77 @@ button {
   display: block;
   margin: 20px auto;
   background-color: $grey;
+  }
+}
+
+.error-msg {
+  margin: 5px;
+  font-style: italic;
+}
+
+.manager-home,
+.client-home {
+  height: 90vh;
+  width: 100%;
+}
+
+.today-stats {
+  padding: 20px;
+  border-radius: 5px;
+  width: 40%;
+  margin: 30px auto;
+  background: rgba($sage, 0.3);
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+  }
+  li {
+    margin: 20px;
+  }
+  p {
+    text-align: center;
+  }
+  h3 {
+    text-align: center;
+  }
+}
+
+.bed-icon {
+  @include stat-icons("../images/bed-solid.png");
+}
+
+.money-icon {
+  @include stat-icons("../images/money-bill-solid.png");
+}
+
+.percent-icon {
+  @include stat-icons("../images/percentage-solid.png");
+}
+
+.available-rooms-title {
+  text-align: center;
+  margin-top: 50px;
+}
+
+/// room container
+
+.rooms-container {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  .room-container {
+    border-radius: 5px;
+    background-color: $grey;
+    width: 30%;
+    height: 300px;
+    div {
+      content: url("../images/hotelOne.jpg");
+      object-fit: fill;
+      border-radius: 5px 5px 0 0;
+      width: 100%;
+      height: 70%;
+    }
   }
 }
