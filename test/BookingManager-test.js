@@ -96,5 +96,9 @@ describe('BookingManager', function() {
       expect(bookingManager.findTodaysRevenue()).to.equal(958.4);
     });
 
+    it("should be able to calculate percentage occupied", function() {
+      expect(bookingManager.findPercentOccupied()).to.equal(50);
+    });
+
 
 })
