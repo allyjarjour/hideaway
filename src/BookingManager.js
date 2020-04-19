@@ -1,4 +1,4 @@
-// import dom from './dom.js';
+import dom from './dom.js';
 
 
 class BookingManager {
@@ -7,7 +7,7 @@ class BookingManager {
     this.allBookings = allBookings;
     this.allClients = allClients;
     this.searchedClient;
-    this.todaysBookings = this.allBookings.filter(booking => booking.date === date)
+    this.todaysBookings = this.allBookings.filter(booking => booking.date === date);
   }
 
   bookRoom() {
@@ -50,7 +50,6 @@ class BookingManager {
       return !bookedNumbers.includes(room.number)
     })
     return availRooms
-    // dom.showOpenRooms(todaysOpenRooms); //test with spy
     //update dom to show recent changes if necessary
   }
 
@@ -65,8 +64,9 @@ class BookingManager {
     //update dom to show recent changes if necessary
   }
 
-  findPercentageOccupied() {
-
+  findPercentOccupied() {
+    let totalBooked = this.todaysBookings.map(({ roomNumber }) => roomNumber).length;
+    return (totalBooked / this.allRooms.length) * 100
     //update dom to show recent changes if necessary
   }
 
