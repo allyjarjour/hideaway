@@ -5,9 +5,9 @@ import AllClients from '../src/AllClients';
 describe('AllClients', function() {
   let allClients;
   let clients = [{id: 1, name: "Leatha Ullrich"},
-  {id: 2, name: "Rocio Schuster"}, {id: 3, name: "Kelvin Schiller"},
-  {id: 4, name: "Kennedi Emard"}, {id: 5, name: "Rhiannon Little"},
-  {id: 6, name: "Fleta Schuppe"}]
+    {id: 2, name: "Rocio Schuster"}, {id: 3, name: "Kelvin Schiller"},
+    {id: 4, name: "Kennedi Emard"}, {id: 5, name: "Rhiannon Little"},
+    {id: 6, name: "Fleta Schuppe"}]
 
   beforeEach(() => {
     allClients = new AllClients(clients, 'username3')
@@ -21,16 +21,20 @@ describe('AllClients', function() {
     expect(allClients).to.be.an.instanceof(AllClients);
   });
 
-  it('should hold current client id', function() {
-    expect(allClients.currentClientID).to.equal(3);
+  it('should hold all clients', function() {
+    expect(allClients.allClients).to.have.lengthOf(6);
   });
+
+  // it('should hold current client id', function() {
+  //   expect(allClients.currentClientID).to.equal(3);
+  // });
 
   it('should find current client id', function() {
     expect(allClients.findClientID('username3')).to.equal(3);
   });
 
   it('should find current client', function() {
-    expect(allClients.findCurrentClient()).to.deep.equal(
+    expect(allClients.findCurrentClient('username3')).to.deep.equal(
       {id: 3, name: "Kelvin Schiller"});
   });
 

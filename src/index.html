@@ -16,13 +16,45 @@
             <label for="username"><p>Username</p></label>
             <input class="username-input" type="text" name="username"></input>
             <label for="password"><p>Password</p></label>
-            <input type="text" name="password"></input>
+            <input class="password" type="text" name="password"></input>
             <button id="sign-in-btn">Submit</button>
+            <p class="error-msg hide">Invalid login. Please try again</p>
           </form>
         </section>
         <img class="background-img" src="../images/cactus.jpg" alt="Cactus in Oaxaca">
       </section>
-      <section class="manager-home"></section>
+      <section class="manager-home">
+        <section class="today-stats">
+          <h3>Today in numbers</h3>
+          <ul>
+            <li>
+              <div class="bed-icon"></div>
+              <p id="open-beds">40</p>
+            </li>
+            <li>
+              <div class="money-icon"></div>
+              <p>40</p>
+            </li>
+            <li>
+              <div class="percent-icon"></div>
+              <p>40</p>
+            </li>
+          </ul>
+        </section>
+        <h2 class="available-rooms-title">Available Rooms</h2>
+        <section class="rooms-container">
+          <div class="room-container">
+            <div>pic</div>
+            <p>Room type</p>
+          </div>
+          <div class="room-container">
+            <div>pic</div>
+            <p>Room type</p>
+          </div>
+        </section>
+        <div>
+        </div>
+      </section>
       <section class="manager-bookings"></section>
       <section class="client-home"></section>
       <section class="client-bookings"></section>

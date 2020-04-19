@@ -3,3 +3,12 @@ $dusty-pink: #BD9391;
 $sage: #88958D;
 $teal: #476A6F;
 $grey: #DBDBDB;
+
+@mixin stat-icons($url) {
+  background-image: url($url);
+  background-position: center;
+  background-size: 3.4vw;
+  height: 5vw;
+  width: 5vw;
+  background-repeat: no-repeat;
+}
