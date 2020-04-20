@@ -8,6 +8,8 @@
     <main>
       <nav>
         <h1 class="header">Hideaway</h1>
+        <div class="profile-tab">
+        </div>
       </nav>
       <section class="sign-in-page">
         <section class="sign-in-section">
@@ -50,11 +52,18 @@
       </section>
       <section class="manager-bookings"></section>
       <section class="client-home">
-        <h2 class="available-rooms-title">Available Rooms</h2>
+        <h2 class="available-rooms-title">My Bookings</h2>
+        <h3 class="total-spent"></h3>
         <section class="rooms-container">
         </section>
       </section>
-      <section class="client-bookings"></section>
+      <section class="client-bookings">
+        <section class="datepicker-container">
+          <label for="client-datepicker"><p>When are you joining us?</p></label>
+          <input type="text" placeholder="please select a date" id="client-datepicker" name="reservation-date" autocomplete="off"></input>
+          <p class="date-alert hide">Choose a day in the future, please! We can't time travel quite yet 😑</p>
+        </section>
+      </section>
     </main>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>

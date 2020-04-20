@@ -9,6 +9,7 @@ import './images/cactus.jpg'
 import './images/suitefull.jpg'
 import './images/residentialqueen.jpg'
 import './images/singletwin.jpg'
+import './images/suitetwin.jpg'
 import './images/singlefull.jpg'
 import './images/singleking.jpg'
 import './images/singlequeen.jpg'
@@ -22,9 +23,9 @@ import BookingManager from './BookingManager.js'
 import AllClients from './AllClients.js'
 import Client from './Client.js'
 const moment = require('moment');
-// const todayDate = moment().format('MMMM Do YYYY');
-// const todayDate = "2020/01/12";
+import datepicker from 'js-datepicker'
 
+// const todayDate = moment().format('YYYY/D/MM');
 
 const allData = {
   userData: null,
@@ -34,8 +35,24 @@ const allData = {
   bookingManager: null,
   currentClient: null,
   clientLogin: null,
-  todayDate: "2020/04/18"
+  todayDate: moment().format('YYYY/D/MM'),
+  selectedDate: null
 }
+
+const picker = datepicker('#client-datepicker', {
+  onSelect: (instance, date) => {
+    let todayDate = allData.todayDate.split('/');
+    if (date <= instance.startDate) {
+      $('.date-alert').removeClass('hide')
+    } else {
+      $('.date-alert').addClass('hide')
+    }
+    allData.selectedDate = date.toLocaleDateString();
+    return date.toLocaleDateString();
+  }
+})
+
+picker.calendarContainer.style.setProperty('font-family', 'Raleway')
 
 fetchData().then(response => {
   allData.userData = response.userData;
@@ -49,9 +66,7 @@ fetchData().then(response => {
   })
   .catch(err => console.log(err))
 
-/// event listeners
-
-$('#sign-in-btn').on('click', function() {
+$('#sign-in-btn').click(function() {
   event.preventDefault();
   validateUser();
 })
@@ -64,10 +79,10 @@ function validateUser() {
     createBookingManager();
     dom.loadManagerHome(allData);
   } else if (username === 'username' && id > 0 && id <= 50 && $('.password').val() === 'overlook2020') {
-    dom.loadClientHome();
     createAllClients();
     createBookingManager();
     createUser();
+    dom.loadClientHome(allData);
   } else {
     $('.error-msg').removeClass('hide')
   }
@@ -90,3 +105,22 @@ function createAllClients() {
   allData.allClients = new AllClients(allData.userData);
   console.log(allData.allClients);
 }
+
+$('main').click(function(event) {
+  if (event.target.id === 'book-room') {
+    dom.populateClientBooking(allData)
+  }
+  if (event.target.id === 'go-home') {
+    dom.loadClientHome(allData);
+  }
+  if (event.target.id === 'manager-dashboard') {
+    dom.loadManagerHome(allData);
+  }
+  if (event.target.id === 'book-for-client') {
+    // load client booking page
+  }
+})
+
+// $('#client-datepicker').click(function() {
+//   console.log(picker);
+// })
