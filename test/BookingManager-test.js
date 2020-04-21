@@ -1,12 +1,15 @@
+import chai from 'chai'
 import { expect } from 'chai';
 import spies from 'chai-spies';
-import chai from 'chai';
 chai.use(spies);
 
 import BookingManager from '../src/BookingManager';
 import dom from '../src/dom.js';
+// import $ from "jquery"
+
 
 describe('BookingManager', function() {
+  let dom = {}
   let todayDate = "2020/02/22";
   let allClients = [{id: 1, name: "Leatha Ullrich"},
     {id: 2, name: "Rocio Schuster"}, {id: 3, name: "Kelvin Schiller"},
@@ -29,7 +32,7 @@ describe('BookingManager', function() {
 
   beforeEach(() => {
     bookingManager = new BookingManager(roomSelection, allBookings, allClients, todayDate)
-    chai.spy.on(dom, ['showOpenRooms'], () => true);
+    chai.spy.on(dom, ['showRooms']);
     });
 
   afterEach(function() {
