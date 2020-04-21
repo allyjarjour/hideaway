@@ -63,6 +63,44 @@ describe('Client', function() {
       ]);
     });
 
+    it('should provide room details for each booking', function() {
+      expect(client.getDetailedBooking()).to.deep.equal([
+        {
+          id: '5fwrgu4i7k55hl727',
+          userID: 1,
+          date: '2020/01/20',
+          roomNumber: 22,
+          roomType: 'residential suite',
+          bedSize: 'queen',
+          bidet: true,
+          numBeds: 1,
+          costPerNight: 358.4
+        },
+        {
+          id: '5fwrgu4i7k55hl72q',
+          userID: 1,
+          date: '2020/01/19',
+          roomNumber: 19,
+          roomType: 'residential suite',
+          bedSize: 'queen',
+          bidet: true,
+          numBeds: 1,
+          costPerNight: 600
+        },
+        {
+          id: '5fwrgu4i7k55hl732',
+          userID: 1,
+          date: '2020/01/18',
+          roomNumber: 15,
+          roomType: 'residential suite',
+          bedSize: 'queen',
+          bidet: true,
+          numBeds: 1,
+          costPerNight: 150.4
+        }
+      ]);
+    });
+
     it('should find total spent for each client', function() {
       client.findTotalSpent(roomSelection);
       expect(client.findTotalSpent(roomSelection)).to.equal(1108.8);
@@ -71,6 +109,10 @@ describe('Client', function() {
     it('should hold total spent for a given client', function() {
       client.findTotalSpent(roomSelection);
       expect(client.totalSpent).to.equal(1108.8);
+    });
+
+    it('should be able to book a room', function() {
+
     });
 
 });

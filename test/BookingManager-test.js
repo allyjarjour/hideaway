@@ -1,8 +1,10 @@
 import { expect } from 'chai';
+import spies from 'chai-spies';
+import chai from 'chai';
+chai.use(spies);
+
 import BookingManager from '../src/BookingManager';
-
-// import dom from './dom.js';
-
+import dom from '../src/dom.js';
 
 describe('BookingManager', function() {
   let todayDate = "2020/02/22";
@@ -27,7 +29,12 @@ describe('BookingManager', function() {
 
   beforeEach(() => {
     bookingManager = new BookingManager(roomSelection, allBookings, allClients, todayDate)
+    chai.spy.on(dom, ['showOpenRooms'], () => true);
     });
+
+  afterEach(function() {
+    chai.spy.restore(dom);
+    })
 
     it('should be a function', function() {
       expect(BookingManager).to.be.a('function');
@@ -76,7 +83,7 @@ describe('BookingManager', function() {
     it('should be able to find all spendings for a particular client', function() {
       bookingManager.findClient('Rocio');
       bookingManager.findClientBookings();
-      expect(bookingManager.findClientSpendings()).to.equal(958.4);
+      expect(bookingManager.findClientSpendings()).to.equal(958.40);
     });
 
     // it('should be able to delete a booking', function() {
@@ -93,12 +100,20 @@ describe('BookingManager', function() {
     });
 
     it("should be able to calculate total revenue for a given date", function() {
-      expect(bookingManager.findTodaysRevenue()).to.equal(958.4);
+      expect(bookingManager.findTodaysRevenue()).to.equal(958.40);
     });
 
     it("should be able to calculate percentage occupied", function() {
-      expect(bookingManager.findPercentOccupied()).to.equal(50);
+      expect(bookingManager.findPercentOccupied()).to.equal('50');
     });
+
+    it("should be able to find available rooms by any date", function() {
+      let selectedDate = "2020/04/20"
+      bookingManager.findRoomsByDate(selectedDate);
+      // chai.spy.on(dom, ['showOpenRooms'], (availRooms) => true);
+      expect(dom.showOpenRooms).to.have.been.called(1);
+      expect(dom.showOpenRooms).to.have.been.called.with(availRooms);
+    })
 
 
 })
