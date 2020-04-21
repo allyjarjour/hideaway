@@ -24,7 +24,7 @@ const dom = {
     $('.client-name').text('Welome, Ally!')
     this.showStats(allData);
     // allData.bookingManager.findTodaysOpenRooms();
-    this.showOpenRooms(allData.bookingManager.findTodaysOpenRooms())
+    this.showRooms(allData.bookingManager.findTodaysOpenRooms())
     this.populateManagerNav();
   },
   // <div class="profile-tab">
@@ -48,7 +48,7 @@ const dom = {
     $('.percent-full').text(`${allData.bookingManager.findPercentOccupied()}%`)
   },
 
-  showOpenRooms(todaysOpenRooms) {
+  showRooms(todaysOpenRooms) { //chanhe to show Rooms
     $('.rooms-container').html(``)
     todaysOpenRooms.forEach(room => {
       $('.rooms-container').append(`<div class="room-container">
@@ -57,6 +57,7 @@ const dom = {
       <p>number of beds: ${room.numBeds}</p><p>cost: $${room.costPerNight}</p>
       </div>`)
     })
+    this.showFilter();
   },
 
   ///client ----------------
@@ -65,6 +66,7 @@ const dom = {
     $('.sign-in-page').addClass('hide')
     $('nav').removeClass('hide')
     $('.client-home').removeClass('hide')
+    $('.client-bookings').addClass('hide')
     $('.total-spent').text(`Total Spent: $${allData.currentClient.totalSpent}`)
     this.showBookedRooms(allData);
     this.populateClientNav(allData);
@@ -72,13 +74,12 @@ const dom = {
 
   showBookedRooms(allData) {
     $('.rooms-container').html(``)
-    console.log(allData.currentClient.allBookings);
     allData.currentClient.getDetailedBooking().forEach(room => {
       $('.rooms-container').append(`<div class="room-container">
       <img src="./images/${room.roomType.split(' ')[0]}${room.bedSize}.jpg" class="hotel-pic">
       <p>${room.roomType}</p><p>bed size: ${room.bedSize}</p>
       <p>number of beds: ${room.numBeds}</p><p>cost: $${room.costPerNight}</p>
-      <div class="date">${room.date}</div>
+      <div class="date"><p>${room.date}</p></div>
       </div>`)
     })
   },
@@ -93,11 +94,43 @@ const dom = {
       </ul>`)
   },
 
-  populateClientBooking(allData) {
+  populateClientBookingPage(allData) {
+    $('.rooms-container').html(``)
     $('.client-home').addClass('hide');
     $('.client-bookings').removeClass('hide');
-    console.log($('#client-datepicker').val());
+  },
+
+  showAlert() {
+    $('.no-rooms').removeClass('hide')
+  },
+
+  showFilter() {
+    $('.filter-area').removeClass('hide')
+  },
+
+  filterRooms(event, allData) {
+    let rooms = allData.bookingManager.findRoomsByDate(allData.selectedDate);
+    let filtered = rooms.filter(room => {
+      if ($(event.target).text() === 'Residential') {
+      return room.roomType === "residential suite"
+      }
+      if ($(event.target).text() === 'Suite') {
+        return room.roomType === "suite"
+      }
+      if ($(event.target).text() === 'Single Room') {
+        return room.roomType === "single room"
+      }
+      if ($(event.target).text() === 'Junior Suite') {
+        return room.roomType === "junior suite"
+      }
+    })
+    this.showRooms(filtered);
   }
+
+  // populateRoomsByDate(availRooms) {
+  //   console.log(availRooms);
+  //   showOpenRooms(availRooms);
+  // }
 
 }
 

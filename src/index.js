@@ -35,22 +35,38 @@ const allData = {
   bookingManager: null,
   currentClient: null,
   clientLogin: null,
-  todayDate: moment().format('YYYY/D/MM'),
+  todayDate: moment().format('YYYY/MM/D'),
   selectedDate: null
 }
 
 const picker = datepicker('#client-datepicker', {
   onSelect: (instance, date) => {
     let todayDate = allData.todayDate.split('/');
-    if (date <= instance.startDate) {
+    if (date < instance.startDate) {
       $('.date-alert').removeClass('hide')
     } else {
       $('.date-alert').addClass('hide')
+      formatDate(date.toLocaleDateString());
+      allData.bookingManager.findRoomsByDate(allData.selectedDate);
+      console.log(allData.currentClient);
+      console.log(allData.selectedDate);
+      // dom.populateRoomsByDate(allData);
     }
-    allData.selectedDate = date.toLocaleDateString();
-    return date.toLocaleDateString();
   }
 })
+
+function formatDate(dateToFormat) {
+  let splitDateInfo = dateToFormat.split('/')
+  let month = splitDateInfo[0];
+  let day = splitDateInfo[1];
+  if (splitDateInfo[0] < 10) {
+    month = `0${splitDateInfo[0]}`
+  }
+  if (splitDateInfo[1] < 10) {
+    day = `0${splitDateInfo[1]}`
+  }
+  allData.selectedDate = `${splitDateInfo[2]}/${month}/${day}`
+}
 
 picker.calendarContainer.style.setProperty('font-family', 'Raleway')
 
@@ -108,7 +124,7 @@ function createAllClients() {
 
 $('main').click(function(event) {
   if (event.target.id === 'book-room') {
-    dom.populateClientBooking(allData)
+    dom.populateClientBookingPage(allData)
   }
   if (event.target.id === 'go-home') {
     dom.loadClientHome(allData);
@@ -121,6 +137,7 @@ $('main').click(function(event) {
   }
 })
 
-// $('#client-datepicker').click(function() {
-//   console.log(picker);
-// })
+$('.dropdown-menu').click(function(event) {
+  $(event.target).addClass('active').siblings().removeClass('active');
+  dom.filterRooms(event, allData);
+});

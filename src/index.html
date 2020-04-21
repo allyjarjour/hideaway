@@ -55,14 +55,26 @@
         <h2 class="available-rooms-title">My Bookings</h2>
         <h3 class="total-spent"></h3>
         <section class="rooms-container">
+          <!-- <div class="hover hide"></div> -->
         </section>
       </section>
       <section class="client-bookings">
         <section class="datepicker-container">
-          <label for="client-datepicker"><p>When are you joining us?</p></label>
+          <label for="client-datepicker"><h3>When are you joining us?</h3></label>
           <input type="text" placeholder="please select a date" id="client-datepicker" name="reservation-date" autocomplete="off"></input>
           <p class="date-alert hide">Choose a day in the future, please! We can't time travel quite yet 😑</p>
         </section>
+        <p class="no-rooms hide">We're sorry! But there are no available rooms for this date. Please try a different date if you're flexible</p>
+        <div class="filter-area hide">
+          <h3 class="filter-title">Filter by room type</h3>
+          <ul class="dropdown-menu">
+            <li>Suite</li>
+            <li>Residential</li>
+            <li>Junior Suite</li>
+            <li>Single Room</li>
+          </ul>
+        </div>
+        <section class="rooms-container"></section>
       </section>
     </main>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->

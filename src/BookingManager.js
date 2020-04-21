@@ -1,6 +1,5 @@
 import dom from './dom.js';
 
-
 class BookingManager {
   constructor(allRooms, allBookings, allClients, date) {
     this.allRooms = allRooms;
@@ -35,7 +34,7 @@ class BookingManager {
           total += room.costPerNight;
         }
       })
-      return total;
+      return Number(total.toFixed(2));
     }, 0)
   }
 
@@ -58,16 +57,30 @@ class BookingManager {
     let bookedRooms = this.allRooms.filter(room => {
       return bookedNumbers.includes(room.number)
     })
-    return bookedRooms.reduce((total, room) => {
+    let totalRev = bookedRooms.reduce((total, room) => {
       return total += room.costPerNight
     }, 0)
-    //update dom to show recent changes if necessary
+    return Number(totalRev.toFixed(2))
   }
 
   findPercentOccupied() {
     let totalBooked = this.todaysBookings.map(({ roomNumber }) => roomNumber).length;
-    return (totalBooked / this.allRooms.length) * 100
-    //update dom to show recent changes if necessary
+    return ((totalBooked / this.allRooms.length) * 100).toFixed(0)
+  }
+
+  findRoomsByDate(selectedDate) {
+    let bookingsOnDate = this.allBookings.filter(booking => booking.date ===
+      selectedDate)
+    let bookedNumbers = bookingsOnDate.map(({ roomNumber }) => roomNumber)
+    let availRooms = this.allRooms.filter(room => {
+      return !bookedNumbers.includes(room.number)
+    })
+    if (availRooms.length === 0) {
+      dom.showAlert();
+      return
+    }
+    dom.showRooms(availRooms);
+    return availRooms
   }
 
 }
