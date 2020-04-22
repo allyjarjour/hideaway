@@ -1,10 +1,13 @@
 # Hideaway
 
+## Abstract
+I was tasked with building a website with two users in mind——the manager and the client. The client is able to browse available rooms (and book a room) for a given date, see their bookings and see money spent on past and future bookings. The manager is able to log in and see total revenue for a given day, percent occupany and rooms available for the current date. They can also book a room for a client or delete a booking if necessary.
+
+We weren't given a spec, only user stories, so I had fun designing this one!
+
 ## Clone This Repo
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
-
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
+1. Clone down this repo. You can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
 1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
 1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
 1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
@@ -41,5 +44,13 @@ Project is running at http://localhost:8080/
 
 Go to `http://localhost:8080/` in your browser to view your code running in the browser.
 
+## Checkout the site below:
+
+![](https://media.giphy.com/media/dw8ojfskLflJiYVSFU/giphy.gif)
 
 ![](https://media.giphy.com/media/ZGCXIngxUkyotFGLNA/giphy.gif)
+
+Color theme:
+
+![](https://user-images.githubusercontent.com/52683607/79948794-c022ee00-8431-11ea-82d8-ce4209a67c57.png)
+
