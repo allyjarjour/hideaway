@@ -318,8 +318,14 @@ button {
   .room-container {
     &:hover > .booking-warning {
     @include booking-hover();
+    cursor: pointer;
     }
   }
+}
+
+.booking-warning {
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .client-bookings {
@@ -328,8 +334,4 @@ button {
     @include booking-hover();
     }
   }
-}
-
-.booking-warning {
-  visibility: hidden;
 }

@@ -55,6 +55,7 @@ class Client {
       .then(response => response.json())
       .then(json => console.log('Request success: ', json))
       .catch(err => console.log('Request failure: ', error));
+      window.alert('The booking has been made');
   }
 
 }
