@@ -16,7 +16,7 @@ const dom = {
 
   populateManagerNav() {
     $('.profile-tab').html(`
-      <img class="profile-icon" alt="profile icon" src="../images/user-solid.png">
+      <img src="./images/user-solid.png" class="profile-icon" alt="profile icon">
       <p class="client-name">Welcome, Ally!</p>
       <ul class="dropdown">
         <li id="manager-dashboard">Dashboard</li>
@@ -102,7 +102,7 @@ const dom = {
 
   populateClientNav(allData) {
     $('.profile-tab').html(`
-      <img class="profile-icon" alt="profile icon" src="../images/user-solid.png">
+      <img src="./images/user-solid.png" class="profile-icon" alt="profile icon">
       <p class="client-name">${allData.currentClient.name}</p>
       <ul class="dropdown">
         <li id="book-room">Book a Room</li>
