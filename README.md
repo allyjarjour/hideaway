@@ -28,7 +28,7 @@ npm install
 To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with some `h1` text and a pink background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
 
 
-## How to View Your Code in Action
+## View The Code in Action
 
 In the terminal, run:
 
