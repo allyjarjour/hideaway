@@ -25,6 +25,7 @@ class BookingManager {
       .then(response => response.json())
       .then(json => console.log('Request success: ', json))
       .catch(err => console.log('Request failure: ', error));
+      window.alert('The booking has been made');
   }
 
   findClient(client) {
@@ -53,17 +54,19 @@ class BookingManager {
   }
 
   deleteFutureBooking(id) {
+    console.log(id);
     fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id: id
+        "id": Number(id)
       })
     })
       .then(response => console.log(response.json()))
       .catch(err => console.log(err));
+      window.alert('The booking has been deleted');
     }
 
 

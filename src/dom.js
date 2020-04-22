@@ -2,6 +2,7 @@ import $ from "jquery"
 
 const dom = {
 
+/// set up for one the fetch data invokes after changing api
   loadManagerHome(allData) {
     $('.manager-bookings').addClass('hide')
     $('.sign-in-page').addClass('hide')
@@ -43,8 +44,13 @@ const dom = {
     this.showFilter();
   },
 
-  loadManagerSearchPage(allData) {
+  loadManagerSearchPage() {
     $('.rooms-container').html(``)
+    $('#client-search').val(``)
+    $('.table-body').html(``)
+    $('.searched-client-name').text(``)
+    $('.total-spent').text(``)
+    $('.client-info').addClass('hide')
     $('.manager-bookings').removeClass('hide')
     $('.manager-home').addClass('hide')
   },
