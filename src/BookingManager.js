@@ -9,9 +9,24 @@ class BookingManager {
     this.todaysBookings = this.allBookings.filter(booking => booking.date === date);
   }
 
-  bookRoom() {
-    //
-    //update dom to show recent changes if necessary
+  bookRoom(roomNum, day) {
+    console.log(typeof day, day);
+    console.log(typeof Number(roomNum), Number(roomNum));
+    console.log(typeof Number(this.searchedClient.id), Number(this.searchedClient.id));
+    fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "userID": Number(this.searchedClient.id),
+        "date": day,
+        "roomNumber": Number(roomNum)
+    }),
+    })
+      .then(response => response.json())
+      .then(json => console.log('Request success: ', json))
+      .catch(err => console.log('Request failure: ', error));
   }
 
   findClient(client) {
@@ -38,10 +53,20 @@ class BookingManager {
     }, 0)
   }
 
-  deleteFutureBooking(date) {
+  deleteFutureBooking(id) {
+    fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: id
+      })
+    })
+    .then(response => console.log(response.json()))
+    .catch(err => console.log(err));
+    }
 
-    //update dom to show recent changes if necessary
-  }
 
   findTodaysOpenRooms() {
     let bookedNumbers = this.todaysBookings.map(({ roomNumber }) => roomNumber);
@@ -49,7 +74,6 @@ class BookingManager {
       return !bookedNumbers.includes(room.number)
     })
     return availRooms
-    //update dom to show recent changes if necessary
   }
 
   findTodaysRevenue() {

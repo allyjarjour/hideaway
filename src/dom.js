@@ -32,7 +32,7 @@ const dom = {
       <p class="client-name">Welcome, Ally!</p>
       <ul class="dropdown">
         <li id="manager-dashboard">Dashboard</li>
-        <li id ="book-for-client">Client Booking</li>
+        <li id ="book-for-client">Manage Bookings</li>
       </ul>
     `)
   },
@@ -56,16 +56,35 @@ const dom = {
   },
 
   loadManagerSearchPage(allData) {
-    console.log('cats');
     $('.rooms-container').html(``)
     $('.manager-bookings').removeClass('hide')
     $('.manager-home').addClass('hide')
   },
 
-  populateClientInfo(client, bookings, spendings) {
+  populateClientInfo(client, bookings, spendings, allData) {
+    $('.table-body').html(``)
     $('.client-info').removeClass('hide')
-    $('.client-info').html(`<h2 class='client-name'>${client.name}</h2>
-      <h3 class='total-spent'>$${spendings}</h3>`)
+    $('.add-booking-section').removeClass('hide')
+    $('.searched-client-name').text(`${client.name}`)
+    $('.total-spent').text(`$${spendings} total spent`)
+    bookings.forEach(booking => {
+      if (booking.date < allData.todayDate) {
+        $('.table-body').append(`
+            <tr>
+              <td>${booking.date}</td>
+              <td>${booking.roomNumber}</td>
+              <td id="booking-id">${booking.id}</td>
+            </tr>`)
+          } else {
+            $('.table-body').append(`
+                <tr>
+                  <td>${booking.date}</td>
+                  <td>${booking.roomNumber}</td>
+                  <td id="booking-id">${booking.id}</td>
+                  <td class="delete">Delete</td>
+                </tr>`)
+          }
+      })
   },
 
   ///client ----------------

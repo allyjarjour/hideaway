@@ -43,22 +43,22 @@ class Client{
   bookRoom(roomNum, day) {
     console.log(typeof day, day);
     console.log(typeof Number(roomNum), Number(roomNum));
-    console.log(typeof this.id, this.id);
-    //update dom to where ^ above methods are invoked
-  //   fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
-  //     method: 'POST',
-  //     headers: {
-  //     	'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       "userID": this.id,
-  //       "date": day,
-  //       "roomNumber": Number(roomNum)
-  //   }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(json => console.log('Request success: ', json))
-  //     .catch(err => console.log('Request failure: ', error));
+    console.log(typeof Number(this.id), Number(this.id));
+    // update dom to where ^ above methods are invoked
+    fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
+      method: 'POST',
+      headers: {
+      	'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "userID": Number(this.id),
+        "date": day,
+        "roomNumber": Number(roomNum)
+    }),
+    })
+      .then(response => response.json())
+      .then(json => console.log('Request success: ', json))
+      .catch(err => console.log('Request failure: ', error));
   }
 
 }

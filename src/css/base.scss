@@ -108,13 +108,10 @@ input {
   padding: 5px;
 }
 
-h2,
-p,
-button,
-h3,
+body,
+.profile-tab,
 input,
-li,
-label {
+button {
   font-family: 'Raleway', sans-serif;
   color: $teal;
 }
@@ -336,7 +333,7 @@ label {
 }
 
 .manager-bookings {
-  width: 50%;
+  width: 100%;
   margin: 30px auto;
   text-align: center;
   input {
@@ -350,5 +347,38 @@ label {
     padding: 5px;
     width: 10%;
     border-radius: 5px;
+  }
+}
+
+.client-info {
+  // width: 100%;
+  margin-top: 40px;
+  .client-name {
+    margin: 20px;
+  }
+}
+
+.client-info-table {
+  margin: 30px 0px 30px 34%;
+  min-width: 400px;
+  width: 40%;
+  th {
+    width: 30%;
+    text-align: left;
+  }
+  td {
+    // width: 30%;
+    text-align: left;
+    margin-right: 10px;
+  }
+  .room-num-data {
+    width: 20%;
+  }
+}
+
+.delete{
+  &:hover {
+    color: $dusty-pink;
+    cursor: pointer;
   }
 }

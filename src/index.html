@@ -55,9 +55,37 @@
         <input type="search" id="client-search" name="client search"
           aria-label="Search through all clients">
         <button class="client-search">Search</button>
+        <!-- <section class="add-booking-section">
+        </section> -->
         <section class="client-info hide">
-          <h3 class='client-name'></h3>
-          <h2 class='total-spent'></h3>
+          <h2 class='searched-client-name'></h2>
+            <h3 class='total-spent'></h3>
+          <table class="client-info-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th class="room-num-data">Room #</th>
+                <th>Booking ID</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+            </tbody>
+          </table>
+          <section class="book-as-manager">
+            <!-- <div class="switch-field">
+              <input type="radio" id="book" name="book" value="book" />
+              <label class="book-button" for="book">Create Booking</label>
+              <input type="radio" id="delete" name="delete" value="delete" />
+              <label class="delete-button" for="delete">Delete Booking</label>
+            </div> -->
+            <section class="datepicker-container">
+              <label for="manager-datepicker">Book a room for this customer:</label>
+              <input type="text" placeholder="please select a date" id="manager-datepicker" name="reservation-date" autocomplete="off"></input>
+              <p class="date-alert hide">Choose a day in the future, please! We can't time travel quite yet 😑</p>
+            </section>
+            <p class="no-rooms hide">No availability for these dates</p>
+            <section class="rooms-container"></section>
+          </section>
         </section>
       </section>
       <section class="client-home">
