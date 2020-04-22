@@ -1,5 +1,3 @@
-import './css/base.scss';
-// import './index.js';
 import $ from "jquery"
 
 const dom = {
@@ -27,7 +25,6 @@ const dom = {
     this.showRooms(allData.bookingManager.findTodaysOpenRooms())
     this.populateManagerNav();
   },
-  // <div class="profile-tab">
 
   populateManagerNav() {
     $('.profile-tab').html(`
@@ -40,24 +37,35 @@ const dom = {
     `)
   },
 
-  // </div>
-
   showStats(allData) {
     $('.open-beds').text(`${allData.bookingManager.findTodaysOpenRooms().length}`);
     $('.total-revenue').text(`$${allData.bookingManager.findTodaysRevenue()}`)
     $('.percent-full').text(`${allData.bookingManager.findPercentOccupied()}%`)
   },
 
-  showRooms(todaysOpenRooms) { //chanhe to show Rooms
+  showRooms(todaysOpenRooms) {
     $('.rooms-container').html(``)
     todaysOpenRooms.forEach(room => {
       $('.rooms-container').append(`<div class="room-container">
       <img src="./images/${room.roomType.split(' ')[0]}${room.bedSize}.jpg" class="hotel-pic">
-      <p>${room.roomType}</p><p>bed size: ${room.bedSize}</p>
+      <p>Room #<span class="roomNum">${room.number}</span> - ${room.roomType}</p><p>bed size: ${room.bedSize}</p>
       <p>number of beds: ${room.numBeds}</p><p>cost: $${room.costPerNight}</p>
       </div>`)
     })
     this.showFilter();
+  },
+
+  loadManagerSearchPage(allData) {
+    console.log('cats');
+    $('.rooms-container').html(``)
+    $('.manager-bookings').removeClass('hide')
+    $('.manager-home').addClass('hide')
+  },
+
+  populateClientInfo(client, bookings, spendings) {
+    $('.client-info').removeClass('hide')
+    $('.client-info').html(`<h2 class='client-name'>${client.name}</h2>
+      <h3 class='total-spent'>$${spendings}</h3>`)
   },
 
   ///client ----------------

@@ -50,7 +50,16 @@
         <section class="rooms-container">
         </section>
       </section>
-      <section class="manager-bookings"></section>
+      <section class="manager-bookings">
+        <label for="client-search">Search for a customer:</label>
+        <input type="search" id="client-search" name="client search"
+          aria-label="Search through all clients">
+        <button class="client-search">Search</button>
+        <section class="client-info hide">
+          <h3 class='client-name'></h3>
+          <h2 class='total-spent'></h3>
+        </section>
+      </section>
       <section class="client-home">
         <h2 class="available-rooms-title">My Bookings</h2>
         <h3 class="total-spent"></h3>

@@ -6,6 +6,7 @@ import dom from './dom.js';
 import fetchData from './allData.js'
 import './css/base.scss';
 import './images/cactus.jpg'
+import './images/user-solid.png'
 import './images/suitefull.jpg'
 import './images/residentialqueen.jpg'
 import './images/singletwin.jpg'
@@ -113,7 +114,6 @@ function createUser() {
 function createBookingManager() {
   allData.bookingManager = new BookingManager(allData.allRooms,
     allData.allBookings, allData.allClients.allClients, allData.todayDate)
-    // console.log(allData.currentClient);
     console.log(allData.bookingManager);
 }
 
@@ -133,7 +133,7 @@ $('main').click(function(event) {
     dom.loadManagerHome(allData);
   }
   if (event.target.id === 'book-for-client') {
-    // load client booking page
+    dom.loadManagerSearchPage(allData);
   }
 })
 
@@ -141,3 +141,23 @@ $('.dropdown-menu').click(function(event) {
   $(event.target).addClass('active').siblings().removeClass('active');
   dom.filterRooms(event, allData);
 });
+
+// book room as client
+
+$('main').click(function(event) {
+  if ($(event.target).hasClass('room-container')) {
+    let roomNum = $(event.target).find('span').text()
+    allData.currentClient.bookRoom(roomNum, allData.selectedDate)
+  }
+});
+
+// show client
+$('.client-search').click(function(event) {
+  let searchName = $('#client-search').val()
+  let client = allData.bookingManager.findClient(searchName)
+  let clientBookings = allData.bookingManager.findClientBookings()
+  let clientSpendings = allData.bookingManager.findClientSpendings()
+  dom.populateClientInfo(client, clientBookings, clientSpendings)
+  console.log(clientBookings);
+  console.log(clientSpendings);
+})

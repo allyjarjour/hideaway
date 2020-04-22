@@ -112,7 +112,10 @@ describe('Client', function() {
     });
 
     it('should be able to book a room', function() {
-
+      let day = "2020/03/15"
+      let roomNum = 15
+      client.bookRoom(roomNum, day);
+      expect(client.allBookings).to.have.lengthOf(4);
     });
 
 });
