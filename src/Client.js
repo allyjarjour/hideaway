@@ -1,6 +1,6 @@
 // const moment = require('moment');
 
-class Client{
+class Client {
   constructor(userData, allBookings, roomSelection) {
     this.name = userData.name;
     this.id = userData.id;
@@ -9,7 +9,6 @@ class Client{
     this.roomSelection = roomSelection;
     this.allBookings = this.findAllBookings(allBookings);
     this.totalSpent = this.findTotalSpent(roomSelection);
-    // this.currentDay = moment().format('YYYY/D/MM');
   }
 
   findAllBookings(allBookings) {
@@ -18,7 +17,8 @@ class Client{
 
   getDetailedBooking() {
     return this.allBookings.map(booking => {
-      let matchedRoom = this.roomSelection.find(room => room.number === booking.roomNumber)
+      let matchedRoom = this.roomSelection.find(room => room.number ===
+        booking.roomNumber)
       let newObject = Object.assign({}, booking);
       newObject.roomType = matchedRoom.roomType;
       newObject.bedSize = matchedRoom.bedSize;
@@ -41,10 +41,6 @@ class Client{
   }
 
   bookRoom(roomNum, day) {
-    console.log(typeof day, day);
-    console.log(typeof Number(roomNum), Number(roomNum));
-    console.log(typeof Number(this.id), Number(this.id));
-    // update dom to where ^ above methods are invoked
     fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
       method: 'POST',
       headers: {
@@ -54,7 +50,7 @@ class Client{
         "userID": Number(this.id),
         "date": day,
         "roomNumber": Number(roomNum)
-    }),
+      }),
     })
       .then(response => response.json())
       .then(json => console.log('Request success: ', json))

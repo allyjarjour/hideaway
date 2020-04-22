@@ -5,7 +5,7 @@ chai.use(spies);
 
 import BookingManager from '../src/BookingManager';
 import dom from '../src/dom.js';
-// import $ from "jquery"
+import $ from "jquery"
 
 
 describe('BookingManager', function() {
@@ -28,6 +28,12 @@ describe('BookingManager', function() {
     {number: 20, roomType: "residential suite", bidet: true, bedSize: "queen",
     numBeds: 1, costPerNight: 150.4}, {number: 30, roomType: "residential suite",
     bidet: true, bedSize: "queen", numBeds: 1, costPerNight: 150.4}]
+  let availRooms = [
+    {number: 22, roomType: "residential suite", bidet: true,
+    bedSize: "queen", numBeds: 1, costPerNight: 358.4},
+    {number: 19, roomType: "residential suite", bidet: true,
+    bedSize: "queen", numBeds: 1, costPerNight: 600}
+    ]
     let bookingManager;
 
   beforeEach(() => {
@@ -62,9 +68,9 @@ describe('BookingManager', function() {
       expect(bookingManager.allClients).to.have.lengthOf(6);
     });
 
-    // it('should be able to book a room', function() {
-    //
-    // });
+    it('should be able to book a room', function() {
+
+    });
 
     it('should be able to find a particular client', function() {
       expect(bookingManager.findClient('Rocio')).to.deep.equal({id: 2, name: "Rocio Schuster"});
@@ -113,7 +119,7 @@ describe('BookingManager', function() {
     it("should be able to find available rooms by any date", function() {
       let selectedDate = "2020/04/20"
       bookingManager.findRoomsByDate(selectedDate);
-      // chai.spy.on(dom, ['showOpenRooms'], (availRooms) => true);
+      chai.spy.on(dom, ['showOpenRooms'], (availRooms));
       expect(dom.showOpenRooms).to.have.been.called(1);
       expect(dom.showOpenRooms).to.have.been.called.with(availRooms);
     })

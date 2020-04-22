@@ -1,5 +1,6 @@
 import dom from './dom.js';
 
+
 class BookingManager {
   constructor(allRooms, allBookings, allClients, date) {
     this.allRooms = allRooms;
@@ -10,9 +11,6 @@ class BookingManager {
   }
 
   bookRoom(roomNum, day) {
-    console.log(typeof day, day);
-    console.log(typeof Number(roomNum), Number(roomNum));
-    console.log(typeof Number(this.searchedClient.id), Number(this.searchedClient.id));
     fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
       method: 'POST',
       headers: {
@@ -22,7 +20,7 @@ class BookingManager {
         "userID": Number(this.searchedClient.id),
         "date": day,
         "roomNumber": Number(roomNum)
-    }),
+      }),
     })
       .then(response => response.json())
       .then(json => console.log('Request success: ', json))
@@ -39,7 +37,8 @@ class BookingManager {
   }
 
   findClientBookings() {
-    return this.allBookings.filter(booking => booking.userID === this.searchedClient.id)
+    return this.allBookings.filter(booking => booking.userID ===
+      this.searchedClient.id)
   }
 
   findClientSpendings() {
@@ -63,8 +62,8 @@ class BookingManager {
         id: id
       })
     })
-    .then(response => console.log(response.json()))
-    .catch(err => console.log(err));
+      .then(response => console.log(response.json()))
+      .catch(err => console.log(err));
     }
 
 

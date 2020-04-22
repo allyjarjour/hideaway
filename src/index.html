@@ -6,7 +6,7 @@
   </head>
   <body>
     <main>
-      <nav>
+      <nav class="hide">
         <h1 class="header">Hideaway</h1>
         <div class="profile-tab">
         </div>
@@ -16,16 +16,16 @@
           <h1 class="header">Hideaway</h1>
           <form class="sign-in-form">
             <label for="username"><p>Username</p></label>
-            <input class="username-input" type="text" name="username"></input>
+            <input id="username" class="username-input" type="text" name="username"></input>
             <label for="password"><p>Password</p></label>
-            <input class="password" type="text" name="password"></input>
+            <input id="password" class="password" type="text" name="password"></input>
             <button id="sign-in-btn">Submit</button>
             <p class="error-msg hide">Invalid login. Please try again</p>
           </form>
         </section>
         <img class="background-img" src="../images/cactus.jpg" alt="Cactus in Oaxaca">
       </section>
-      <section class="manager-home">
+      <section class="manager-home hide">
         <section class="today-stats">
           <h3>Today in numbers</h3>
           <ul>
@@ -50,13 +50,11 @@
         <section class="rooms-container">
         </section>
       </section>
-      <section class="manager-bookings">
+      <section class="manager-bookings hide">
         <label for="client-search">Search for a customer:</label>
         <input type="search" id="client-search" name="client search"
-          aria-label="Search through all clients">
+          placeholder="case sensitive" aria-label="Search through all clients">
         <button class="client-search">Search</button>
-        <!-- <section class="add-booking-section">
-        </section> -->
         <section class="client-info hide">
           <h2 class='searched-client-name'></h2>
             <h3 class='total-spent'></h3>
@@ -72,12 +70,6 @@
             </tbody>
           </table>
           <section class="book-as-manager">
-            <!-- <div class="switch-field">
-              <input type="radio" id="book" name="book" value="book" />
-              <label class="book-button" for="book">Create Booking</label>
-              <input type="radio" id="delete" name="delete" value="delete" />
-              <label class="delete-button" for="delete">Delete Booking</label>
-            </div> -->
             <section class="datepicker-container">
               <label for="manager-datepicker">Book a room for this customer:</label>
               <input type="text" placeholder="please select a date" id="manager-datepicker" name="reservation-date" autocomplete="off"></input>
@@ -88,14 +80,13 @@
           </section>
         </section>
       </section>
-      <section class="client-home">
+      <section class="client-home hide">
         <h2 class="available-rooms-title">My Bookings</h2>
         <h3 class="total-spent"></h3>
         <section class="rooms-container">
-          <!-- <div class="hover hide"></div> -->
         </section>
       </section>
-      <section class="client-bookings">
+      <section class="client-bookings hide">
         <section class="datepicker-container">
           <label for="client-datepicker"><h3>When are you joining us?</h3></label>
           <input type="text" placeholder="please select a date" id="client-datepicker" name="reservation-date" autocomplete="off"></input>
@@ -104,7 +95,7 @@
         <p class="no-rooms hide">We're sorry! But there are no available rooms for this date. Please try a different date if you're flexible</p>
         <div class="filter-area hide">
           <h3 class="filter-title">Filter by room type</h3>
-          <ul class="dropdown-menu">
+          <ul class="filter-menu">
             <li>Suite</li>
             <li>Residential</li>
             <li>Junior Suite</li>
@@ -114,6 +105,5 @@
         <section class="rooms-container"></section>
       </section>
     </main>
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>

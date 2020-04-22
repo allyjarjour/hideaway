@@ -1,6 +1,3 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
 import $ from 'jquery';
 import dom from './dom.js';
 import fetchData from './allData.js'
@@ -26,8 +23,6 @@ import Client from './Client.js'
 const moment = require('moment');
 import datepicker from 'js-datepicker'
 
-// const todayDate = moment().format('YYYY/D/MM');
-
 const allData = {
   userData: null,
   allRooms: null,
@@ -49,9 +44,6 @@ const onSelectObject = {
       $('.date-alert').addClass('hide')
       formatDate(date.toLocaleDateString());
       allData.bookingManager.findRoomsByDate(allData.selectedDate);
-      console.log(allData.currentClient);
-      console.log(allData.selectedDate);
-      // dom.populateRoomsByDate(allData);
     }
   }
 }
@@ -65,9 +57,6 @@ const picker = datepicker(('#client-datepicker'), {
       $('.date-alert').addClass('hide')
       formatDate(date.toLocaleDateString());
       allData.bookingManager.findRoomsByDate(allData.selectedDate);
-      console.log(allData.currentClient);
-      console.log(allData.selectedDate);
-      // dom.populateRoomsByDate(allData);
     }
   }
 })
@@ -106,11 +95,6 @@ fetchData().then(response => {
   allData.allRooms = response.allRooms;
   allData.allBookings = response.allBookings;
 })
-  .then( () => {
-    dom.load(allData);
-    // dom.loadManagerHome(allData)
-    console.log(allData.allRooms);
-  })
   .catch(err => console.log(err))
 
 $('#sign-in-btn').click(function() {
@@ -167,7 +151,7 @@ $('main').click(function(event) {
   }
 })
 
-$('.dropdown-menu').click(function(event) {
+$('.filter-menu').click(function(event) {
   $(event.target).addClass('active').siblings().removeClass('active');
   dom.filterRooms(event, allData);
 });
@@ -181,7 +165,8 @@ $('.client-bookings').click(function(event) {
   }
 });
 
-// show client on manager page
+// search client as manaager, delete bookings and book room for client
+
 $('.client-search').click(function(event) {
   let searchName = $('#client-search').val()
   let client = allData.bookingManager.findClient(searchName)

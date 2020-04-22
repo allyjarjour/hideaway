@@ -2,26 +2,14 @@ import $ from "jquery"
 
 const dom = {
 
-  load(allData) {
-    this.loadWelcomePage();
-  },
-
-  loadWelcomePage() {
-    $('nav').addClass('hide')
-    $('.manager-home').addClass('hide')
-    $('.manager-bookings').addClass('hide')
-    $('.client-home').addClass('hide')
-    $('.client-bookings').addClass('hide')
-  },
-
   loadManagerHome(allData) {
+    $('.manager-bookings').addClass('hide')
     $('.sign-in-page').addClass('hide')
     $('nav').removeClass('hide')
     $('.manager-home').removeClass('hide')
     $('.client-home').addClass('hide')
     $('.client-name').text('Welome, Ally!')
     this.showStats(allData);
-    // allData.bookingManager.findTodaysOpenRooms();
     this.showRooms(allData.bookingManager.findTodaysOpenRooms())
     this.populateManagerNav();
   },
@@ -50,7 +38,7 @@ const dom = {
       <img src="./images/${room.roomType.split(' ')[0]}${room.bedSize}.jpg" class="hotel-pic">
       <p>Room #<span class="roomNum">${room.number}</span> - ${room.roomType}</p><p>bed size: ${room.bedSize}</p>
       <p>number of beds: ${room.numBeds}</p><p>cost: $${room.costPerNight}</p>
-      </div>`)
+      <div class="booking-warning"><p>Click Once to Book</p></div></div>`)
     })
     this.showFilter();
   },
@@ -90,6 +78,7 @@ const dom = {
   ///client ----------------
 
   loadClientHome(allData) {
+    $('.rooms-container').html(``)
     $('.sign-in-page').addClass('hide')
     $('nav').removeClass('hide')
     $('.client-home').removeClass('hide')
@@ -153,11 +142,6 @@ const dom = {
     })
     this.showRooms(filtered);
   }
-
-  // populateRoomsByDate(availRooms) {
-  //   console.log(availRooms);
-  //   showOpenRooms(availRooms);
-  // }
 
 }
 
