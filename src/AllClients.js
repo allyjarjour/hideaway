@@ -1,8 +1,6 @@
 class AllClients {
   constructor(allClients) {
     this.allClients = allClients
-    // this.currentClientID = this.findClientID(clientUserName);
-    // this.currentClient = this.findCurrentClient(this.currentClientID);
   }
 
   findClientID(clientUserName) {
@@ -11,7 +9,8 @@ class AllClients {
   }
 
   findCurrentClient(clientUserName) {
-    return this.allClients.find(client => client.id === this.findClientID(clientUserName))
+    return this.allClients.find(client => client.id ===
+      this.findClientID(clientUserName))
   }
 
 }

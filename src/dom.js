@@ -2,26 +2,14 @@ import $ from "jquery"
 
 const dom = {
 
-  load(allData) {
-    this.loadWelcomePage();
-  },
-
-  loadWelcomePage() {
-    $('nav').addClass('hide')
-    $('.manager-home').addClass('hide')
-    $('.manager-bookings').addClass('hide')
-    $('.client-home').addClass('hide')
-    $('.client-bookings').addClass('hide')
-  },
-
   loadManagerHome(allData) {
+    $('.manager-bookings').addClass('hide')
     $('.sign-in-page').addClass('hide')
     $('nav').removeClass('hide')
     $('.manager-home').removeClass('hide')
     $('.client-home').addClass('hide')
     $('.client-name').text('Welome, Ally!')
     this.showStats(allData);
-    // allData.bookingManager.findTodaysOpenRooms();
     this.showRooms(allData.bookingManager.findTodaysOpenRooms())
     this.populateManagerNav();
   },
@@ -32,7 +20,7 @@ const dom = {
       <p class="client-name">Welcome, Ally!</p>
       <ul class="dropdown">
         <li id="manager-dashboard">Dashboard</li>
-        <li id ="book-for-client">Client Booking</li>
+        <li id ="book-for-client">Manage Bookings</li>
       </ul>
     `)
   },
@@ -50,27 +38,47 @@ const dom = {
       <img src="./images/${room.roomType.split(' ')[0]}${room.bedSize}.jpg" class="hotel-pic">
       <p>Room #<span class="roomNum">${room.number}</span> - ${room.roomType}</p><p>bed size: ${room.bedSize}</p>
       <p>number of beds: ${room.numBeds}</p><p>cost: $${room.costPerNight}</p>
-      </div>`)
+      <div class="booking-warning"><p>Click Once to Book</p></div></div>`)
     })
     this.showFilter();
   },
 
   loadManagerSearchPage(allData) {
-    console.log('cats');
     $('.rooms-container').html(``)
     $('.manager-bookings').removeClass('hide')
     $('.manager-home').addClass('hide')
   },
 
-  populateClientInfo(client, bookings, spendings) {
+  populateClientInfo(client, bookings, spendings, allData) {
+    $('.table-body').html(``)
     $('.client-info').removeClass('hide')
-    $('.client-info').html(`<h2 class='client-name'>${client.name}</h2>
-      <h3 class='total-spent'>$${spendings}</h3>`)
+    $('.add-booking-section').removeClass('hide')
+    $('.searched-client-name').text(`${client.name}`)
+    $('.total-spent').text(`$${spendings} total spent`)
+    bookings.forEach(booking => {
+      if (booking.date < allData.todayDate) {
+        $('.table-body').append(`
+            <tr>
+              <td>${booking.date}</td>
+              <td>${booking.roomNumber}</td>
+              <td id="booking-id">${booking.id}</td>
+            </tr>`)
+          } else {
+            $('.table-body').append(`
+                <tr>
+                  <td>${booking.date}</td>
+                  <td>${booking.roomNumber}</td>
+                  <td id="booking-id">${booking.id}</td>
+                  <td class="delete">Delete</td>
+                </tr>`)
+          }
+      })
   },
 
   ///client ----------------
 
   loadClientHome(allData) {
+    $('.rooms-container').html(``)
     $('.sign-in-page').addClass('hide')
     $('nav').removeClass('hide')
     $('.client-home').removeClass('hide')
@@ -134,11 +142,6 @@ const dom = {
     })
     this.showRooms(filtered);
   }
-
-  // populateRoomsByDate(availRooms) {
-  //   console.log(availRooms);
-  //   showOpenRooms(availRooms);
-  // }
 
 }
 

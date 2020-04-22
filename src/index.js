@@ -1,6 +1,3 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
 import $ from 'jquery';
 import dom from './dom.js';
 import fetchData from './allData.js'
@@ -26,8 +23,6 @@ import Client from './Client.js'
 const moment = require('moment');
 import datepicker from 'js-datepicker'
 
-// const todayDate = moment().format('YYYY/D/MM');
-
 const allData = {
   userData: null,
   allRooms: null,
@@ -40,7 +35,7 @@ const allData = {
   selectedDate: null
 }
 
-const picker = datepicker('#client-datepicker', {
+const onSelectObject = {
   onSelect: (instance, date) => {
     let todayDate = allData.todayDate.split('/');
     if (date < instance.startDate) {
@@ -49,9 +44,32 @@ const picker = datepicker('#client-datepicker', {
       $('.date-alert').addClass('hide')
       formatDate(date.toLocaleDateString());
       allData.bookingManager.findRoomsByDate(allData.selectedDate);
-      console.log(allData.currentClient);
-      console.log(allData.selectedDate);
-      // dom.populateRoomsByDate(allData);
+    }
+  }
+}
+
+const picker = datepicker(('#client-datepicker'), {
+  onSelect: (instance, date) => {
+    let todayDate = allData.todayDate.split('/');
+    if (date < instance.startDate) {
+      $('.date-alert').removeClass('hide')
+    } else {
+      $('.date-alert').addClass('hide')
+      formatDate(date.toLocaleDateString());
+      allData.bookingManager.findRoomsByDate(allData.selectedDate);
+    }
+  }
+})
+
+const picker2 = datepicker(('#manager-datepicker'), {
+  onSelect: (instance, date) => {
+    let todayDate = allData.todayDate.split('/');
+    if (date < instance.startDate) {
+      $('.date-alert').removeClass('hide')
+    } else {
+      $('.date-alert').addClass('hide')
+      formatDate(date.toLocaleDateString());
+      allData.bookingManager.findRoomsByDate(allData.selectedDate);
     }
   }
 })
@@ -70,17 +88,13 @@ function formatDate(dateToFormat) {
 }
 
 picker.calendarContainer.style.setProperty('font-family', 'Raleway')
+picker2.calendarContainer.style.setProperty('font-family', 'Raleway')
 
 fetchData().then(response => {
   allData.userData = response.userData;
   allData.allRooms = response.allRooms;
   allData.allBookings = response.allBookings;
 })
-  .then( () => {
-    dom.load(allData);
-    // dom.loadManagerHome(allData)
-    console.log(allData.allRooms);
-  })
   .catch(err => console.log(err))
 
 $('#sign-in-btn').click(function() {
@@ -137,27 +151,42 @@ $('main').click(function(event) {
   }
 })
 
-$('.dropdown-menu').click(function(event) {
+$('.filter-menu').click(function(event) {
   $(event.target).addClass('active').siblings().removeClass('active');
   dom.filterRooms(event, allData);
 });
 
 // book room as client
 
-$('main').click(function(event) {
+$('.client-bookings').click(function(event) {
   if ($(event.target).hasClass('room-container')) {
     let roomNum = $(event.target).find('span').text()
     allData.currentClient.bookRoom(roomNum, allData.selectedDate)
   }
 });
 
-// show client
+// search client as manaager, delete bookings and book room for client
+
 $('.client-search').click(function(event) {
   let searchName = $('#client-search').val()
   let client = allData.bookingManager.findClient(searchName)
   let clientBookings = allData.bookingManager.findClientBookings()
   let clientSpendings = allData.bookingManager.findClientSpendings()
-  dom.populateClientInfo(client, clientBookings, clientSpendings)
-  console.log(clientBookings);
-  console.log(clientSpendings);
+  dom.populateClientInfo(client, clientBookings, clientSpendings, allData)
+})
+
+$('.client-info').click(function(event) {
+  if ($(event.target).hasClass('delete')) {
+    let idElement = $(event.target).parent().children("#booking-id");
+    let id = idElement.text();
+    allData.bookingManager.deleteFutureBooking(id);
+  }
+})
+
+$('.book-as-manager').click(function(event) {
+  if ($(event.target).hasClass('room-container')) {
+    let date = allData.selectedDate;
+    let roomNum = $(event.target).find('span').text()
+    allData.bookingManager.bookRoom(roomNum, date)
+  }
 })

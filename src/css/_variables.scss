@@ -13,3 +13,19 @@ $grey: #DBDBDB;
   min-width: 50px;
   background-repeat: no-repeat;
 }
+@mixin booking-hover () {
+  cursor: pointer;
+  background-color: rgba($sage, 0.7);
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 30px;
+  text-align: center;
+  p {
+    font-size: 30px;
+    color: white;
+  }
+}
