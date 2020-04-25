@@ -1,4 +1,8 @@
 // const moment = require('moment');
+import allData from './index.js';
+import fetchData from './allData.js'
+import dom from './dom.js';
+
 
 class Client {
   constructor(userData, allBookings, roomSelection) {
@@ -53,10 +57,20 @@ class Client {
       }),
     })
       .then(response => response.json())
-      .then(json => console.log('Request success: ', json))
-      .catch(err => console.log('Request failure: ', error));
-      window.alert('The booking has been made');
-  }
+      .then( () => {
+        fetchData().then(response => {
+          allData.allBookings = response.allBookings;
+          this.allBookings = this.findAllBookings(allData.allBookings);
+        })
+        .then( () => {
+          dom.loadClientHome(allData);
+          dom.showBookedRooms(allData)
+        })
+      })
+      .catch(err => console.log('Request failure: ', error))
+      window.alert('The room has been booked');
+    }
+
 
 }
 

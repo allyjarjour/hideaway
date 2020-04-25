@@ -1,4 +1,7 @@
 import dom from './dom.js';
+import allData from './index.js';
+import fetchData from './allData.js'
+
 
 
 class BookingManager {
@@ -6,8 +9,13 @@ class BookingManager {
     this.allRooms = allRooms;
     this.allBookings = allBookings;
     this.allClients = allClients;
+    this.todaysDate = date;
     this.searchedClient;
-    this.todaysBookings = this.allBookings.filter(booking => booking.date === date);
+    this.todaysBookings = this.findTodaysBookings();
+  }
+
+  findTodaysBookings() {
+    this.todaysBookings = this.allBookings.filter(booking => booking.date === this.todaysDate);
   }
 
   bookRoom(roomNum, day) {
@@ -23,9 +31,19 @@ class BookingManager {
       }),
     })
       .then(response => response.json())
-      .then(json => console.log('Request success: ', json))
-      .catch(err => console.log('Request failure: ', error));
-      window.alert('The booking has been made');
+      .then( () => {
+        fetchData().then(response => {
+          allData.allBookings = response.allBookings;
+          this.allBookings = allData.allBookings;
+        })
+        .then( () => {
+          dom.loadManagerSearchPage();
+          dom.populateClientInfo(this.searchedClient, this.findClientBookings(),
+            this.findClientSpendings(), allData)
+        })
+      })
+      .catch(err => console.log('Request failure: ', error))
+      window.alert('The room has been booked');
   }
 
   findClient(client) {
@@ -54,7 +72,6 @@ class BookingManager {
   }
 
   deleteFutureBooking(id) {
-    console.log(id);
     fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
       method: 'DELETE',
       headers: {
@@ -65,12 +82,24 @@ class BookingManager {
       })
     })
       .then(response => console.log(response.json()))
-      .catch(err => console.log(err));
+      .then( () => {
+        fetchData().then(response => {
+          allData.allBookings = response.allBookings;
+          this.allBookings = allData.allBookings;
+        })
+        .then( () => {
+          dom.loadManagerSearchPage();
+          dom.populateClientInfo(this.searchedClient, this.findClientBookings(),
+            this.findClientSpendings(), allData)
+        })
+      })
+      .catch(err => console.log('Request failure: ', error))
       window.alert('The booking has been deleted');
     }
 
 
   findTodaysOpenRooms() {
+    this.findTodaysBookings();
     let bookedNumbers = this.todaysBookings.map(({ roomNumber }) => roomNumber);
     let availRooms = this.allRooms.filter(room => {
       return !bookedNumbers.includes(room.number)
