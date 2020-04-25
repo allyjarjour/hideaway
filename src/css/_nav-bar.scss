@@ -10,6 +10,10 @@ nav {
   }
 }
 
+.nav-home {
+  cursor: pointer;
+}
+
 .profile-tab{
   &:hover {
 	background: rgba($grey, 0.9);

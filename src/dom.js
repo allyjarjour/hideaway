@@ -10,8 +10,10 @@ const dom = {
     $('.manager-home').removeClass('hide')
     $('.client-home').addClass('hide')
     $('.client-name').text('Welome, Ally!')
+    $('.client-info').addClass('hide');
     this.showStats(allData);
-    this.showRooms(allData.bookingManager.findTodaysOpenRooms())
+    allData.bookingManager.findTodaysOpenRooms(allData.allBookings); // not updating here
+    this.showRooms(allData.bookingManager.findTodaysOpenRooms(allData.allBookings))
     this.populateManagerNav();
   },
 
@@ -27,7 +29,7 @@ const dom = {
   },
 
   showStats(allData) {
-    $('.open-beds').text(`${allData.bookingManager.findTodaysOpenRooms().length}`);
+    $('.open-beds').text(`${allData.bookingManager.findTodaysOpenRooms(allData.allBookings).length}`);
     $('.total-revenue').text(`$${allData.bookingManager.findTodaysRevenue()}`)
     $('.percent-full').text(`${allData.bookingManager.findPercentOccupied()}%`)
   },
@@ -47,10 +49,6 @@ const dom = {
   loadManagerSearchPage() {
     $('.rooms-container').html(``)
     $('#client-search').val(``)
-    $('.table-body').html(``)
-    $('.searched-client-name').text(``)
-    $('.total-spent').text(``)
-    $('.client-info').addClass('hide')
     $('.manager-bookings').removeClass('hide')
     $('.manager-home').addClass('hide')
   },
@@ -89,7 +87,7 @@ const dom = {
     $('nav').removeClass('hide')
     $('.client-home').removeClass('hide')
     $('.client-bookings').addClass('hide')
-    $('.total-spent').text(`Total Spent: $${allData.currentClient.totalSpent}`)
+    $('.total-spent').text(`Total Spent: $${allData.currentClient.findTotalSpent(allData.allRooms)}`)
     this.showBookedRooms(allData);
     this.populateClientNav(allData);
   },

@@ -97,10 +97,12 @@ fetchData().then(response => {
 })
   .catch(err => console.log(err))
 
+
 $('#sign-in-btn').click(function() {
   event.preventDefault();
   validateUser();
 })
+
 
 function validateUser() {
   const id = $('.username-input').val().slice(8)
@@ -128,12 +130,10 @@ function createUser() {
 function createBookingManager() {
   allData.bookingManager = new BookingManager(allData.allRooms,
     allData.allBookings, allData.allClients.allClients, allData.todayDate)
-    console.log(allData.bookingManager);
 }
 
 function createAllClients() {
   allData.allClients = new AllClients(allData.userData);
-  console.log(allData.allClients);
 }
 
 $('main').click(function(event) {
@@ -154,6 +154,15 @@ $('main').click(function(event) {
 $('.filter-menu').click(function(event) {
   $(event.target).addClass('active').siblings().removeClass('active');
   dom.filterRooms(event, allData);
+});
+
+$('.nav-home').click(function(event) {
+  if ($('.client-home').hasClass('hide') && $('.client-bookings').hasClass('hide')) {
+    dom.loadManagerHome(allData);
+  }
+  if ($('.manager-home').hasClass('hide') && $('.manager-bookings').hasClass('hide')) {
+    dom.loadClientHome(allData);
+  }
 });
 
 // book room as client
@@ -188,5 +197,11 @@ $('.book-as-manager').click(function(event) {
     let date = allData.selectedDate;
     let roomNum = $(event.target).find('span').text()
     allData.bookingManager.bookRoom(roomNum, date)
+    let clientBookings = allData.bookingManager.findClientBookings()
+    let clientSpendings = allData.bookingManager.findClientSpendings()
+    let client = allData.bookingManager.searchedClient;
+    dom.populateClientInfo(client, clientBookings, clientSpendings, allData)
   }
 })
+
+export default allData
