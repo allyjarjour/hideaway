@@ -12,7 +12,7 @@ username: manager
 password: overlook2020
 
 _for user page views:_
-username: customer13
+username: username13
 password: overlook2020
 
 ## Clone This Repo
