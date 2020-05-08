@@ -39,9 +39,9 @@ To verify that it is setup correctly, run `npm start` in your terminal. Go to `h
 
 ## Technologies Used
 - Javascript
--jQuery
--Scss
--HTML
+- jQuery
+- Scss
+- HTML
 
 
 ## View The Code in Action
