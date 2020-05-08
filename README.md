@@ -5,6 +5,14 @@ I was tasked with building a website with two users in mind——the manager and
 
 We weren't given a spec, only user stories, so I had fun designing this one!
 
+__Check out the GitHUb pages here:__ https://allyjarjour.github.io/hideaway/
+_for manager page views:_
+username: manager
+password: overlook2020
+_for user page views:_
+username: customer13
+password: overlook2020
+
 ## Clone This Repo
 
 1. Clone down this repo. You can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
