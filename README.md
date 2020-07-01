@@ -32,22 +32,6 @@ To verify that it is setup correctly, run `npm start` in your terminal. Go to `h
 - HTML
 
 
-## View The Code in Action
-
-In the terminal, run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
-
 ## Checkout the site below:
 
 ![](https://media.giphy.com/media/dw8ojfskLflJiYVSFU/giphy.gif)
